@@ -4,7 +4,8 @@ import os
 from datetime import datetime, timedelta
 
 import requests
-from lib.utils import setup_args, setup_logger
+from lib.arguments import setup_args
+from lib.utils import setup_logger
 from packaging import version
 
 
