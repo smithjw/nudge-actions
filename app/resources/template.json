@@ -1,0 +1,22 @@
+{
+    "osVersionRequirements": [
+        {
+            "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
+            "requiredInstallationDate": "",
+            "requiredMinimumOSVersion": "13.0",
+            "targetedOSVersionsRule": "13"
+        },
+        {
+            "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
+            "requiredInstallationDate": "",
+            "requiredMinimumOSVersion": "12.0",
+            "targetedOSVersionsRule": "12"
+        },
+        {
+            "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
+            "requiredInstallationDate": "",
+            "requiredMinimumOSVersion": "11.0",
+            "targetedOSVersionsRule": "11"
+        }
+    ]
+}
