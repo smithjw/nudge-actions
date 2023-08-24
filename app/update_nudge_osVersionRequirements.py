@@ -26,7 +26,7 @@ def get_macos_product_versions():
         except FileNotFoundError:
             logging.error("Local GDMF file not found, falling back to remote GDMF.")
 
-    apple_root_ca = os.path.join(script_dir, "apple_root_ca.pem")
+    apple_root_ca = os.path.join(script_dir, "resources/apple_root_ca.pem")
 
     url = "https://gdmf.apple.com/v2/pmv"
     response = requests.get(url, verify=apple_root_ca)
