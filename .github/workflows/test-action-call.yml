@@ -23,7 +23,7 @@ on:
         required: false
 
 jobs:
-  call-workflow:
+  call_update_nudge_version:
     uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@feat/github-action
     secrets: inherit
     with:
