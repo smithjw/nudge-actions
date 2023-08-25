@@ -195,7 +195,9 @@ if __name__ == "__main__":
     execution_dir = os.getcwd()
 
     setup_logger(debug)
+    logging.info(args)
+    logging.info(f"test_mode: {test_mode}")
+    logging.info(f"debug: {debug}")
     logging.debug("Debug mode enabled")
-    logging.debug(args)
 
     main()
