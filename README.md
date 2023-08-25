@@ -28,7 +28,7 @@ source .venv/bin/activate
 pip install -r app/requirements.txt
 
 # Run Script
-python app/app/update_nudge_osVersionRequirements.py --test-mode
+python app/update_nudge_osVersionRequirements.py --test-mode
 ```
 
 ### Notes
