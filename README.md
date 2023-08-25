@@ -18,8 +18,8 @@ jobs:
       unos_test_mode: true
 ```
 
-If you would like to specify the minimum os version, add `unos_min_major_os_version` to your Workflow
-If you would like to specify location (relative to the working directory of your repo) of the nudge.json file, add `unos_nudge_json_file` to your Workflow
+- If you would like to specify the minimum os version, add `unos_min_major_os_version` to your Workflow
+- If you would like to specify location (relative to the working directory of your repo) of the nudge.json file, add `unos_nudge_json_file` to your Workflow
 
 ## Python Script
 This has been written and tested on Python 3.11. The script can be run independtly of the GitHub Action and takes the following input:
