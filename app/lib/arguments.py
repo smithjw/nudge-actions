@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from lib.utils import string_to_bool
+from lib.utils import check_env_var
 
 
 def setup_args():
@@ -10,15 +10,15 @@ def setup_args():
         "-d",
         "--debug",
         action="store_true",
-        default=string_to_bool(os.getenv("UNOS_DEBUG", False)),
+        default=check_env_var("UNOS_DEBUG", "bool", False),
         help="Enable more verbose logging",
     )
 
     parser.add_argument(
         "-t",
         "--test",
-        default=string_to_bool(os.getenv("UNOS_TEST", False)),
         action="store_true",
+        default=check_env_var("UNOS_TEST", "bool", False),
         help="Uses test data and doesn't write any data to disk",
     )
 
@@ -26,7 +26,7 @@ def setup_args():
         "-v",
         "--version",
         dest="min_major_os_version",
-        default=os.getenv("UNOS_MIN_MAJOR_OS_VERSION", None),
+        default=check_env_var("UNOS_MIN_MAJOR_OS_VERSION", "str", None),
         help="Defines the minimum major OS version to use for the requiredMinimumOSVersion. Defaults to n-1.",
     )
 
@@ -34,7 +34,7 @@ def setup_args():
         "-f",
         "--file",
         dest="nudge_json_file",
-        default=os.getenv("UNOS_NUDGE_JSON_FILE", None),
+        default=check_env_var("UNOS_NUDGE_JSON_FILE", "str", None),
         help="Path to your json file containing a Nudge osVersionRequirements array. If not defined, a file named nudge.json will be created in the current working directory.",
         type=os.path.abspath,
     )

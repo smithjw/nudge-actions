@@ -1,5 +1,6 @@
 import hashlib
 import logging
+import os
 
 
 def string_to_bool(value) -> bool:
@@ -21,6 +22,21 @@ def string_to_bool(value) -> bool:
         return False
     else:
         raise ValueError("invalid truth value %r" % (val,))
+
+
+def check_env_var(var_name, var_type, var_default):
+    var = os.getenv(var_name)
+
+    match var_type:
+        case "bool":
+            if var == "" or var is None:
+                var = var_default
+            else:
+                var = string_to_bool(var)
+        case "str":
+            if var == "" or var is None:
+                var = var_default
+    return var
 
 
 def setup_logger(debug=False):
