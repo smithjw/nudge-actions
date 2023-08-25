@@ -24,7 +24,7 @@ on:
 
 jobs:
   call_update_nudge_version:
-    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@feat/github-action
+    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@main
     secrets: inherit
     with:
       unos_debug: ${{ inputs.unos_debug }}
