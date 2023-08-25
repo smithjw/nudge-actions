@@ -50,15 +50,15 @@ jobs:
       - name: Checkout Nudge-Action Repo
         uses: actions/checkout@v3
         with:
-          repository: smithjw/nudge-action
-          path: nudge-action
+          repository: smithjw/nudge-actions
+          path: nudge-actions
 
       - name: Extract Python version from .tool-versions file
         id: extract_version
         env:
           tool_name: python
         run: |
-          version=$(awk -v name="$tool_name" '$1 == name {print $2}' nudge-action/.tool-versions)
+          version=$(awk -v name="$tool_name" '$1 == name {print $2}' nudge-actions/.tool-versions)
           echo "PYTHON_VERSION=$version" >> $GITHUB_OUTPUT
 
       - name: Install Python
@@ -66,14 +66,14 @@ jobs:
         with:
           python-version: ${{ steps.extract_version.outputs.PYTHON_VERSION }}
           cache: 'pip'
-          cache-dependency-path: 'nudge-action/app/requirements.txt'
+          cache-dependency-path: 'nudge-actions/app/requirements.txt'
 
       - name: Install Python dependencies
         run: |
           python -m venv .venv
           source .venv/bin/activate
           python -m pip install --upgrade pip
-          pip install -r nudge-action/app/requirements.txt
+          pip install -r nudge-actions/app/requirements.txt
 
       - name: Run Nudge-Action
         env:
@@ -83,4 +83,4 @@ jobs:
           UNOS_NUDGE_JSON_FILE: ${{ inputs.UNOS_NUDGE_JSON_FILE }}
         run: |
           source .venv/bin/activate
-          python nudge-action/app/update_nudge_osVersionRequirements.py
+          python nudge-actions/app/update_nudge_osVersionRequirements.py
