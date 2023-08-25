@@ -1,6 +1,26 @@
 # nudge-actions
 Reusable Workflow and stand-alone Python script for updating a Nudge osVersionRequirements array using Apple's gdfm service (https://gdmf.apple.com/v2/pmv).
 
+## Reusable Workflow (in progress)
+To call the workflow from your own repo, create a GitHub Actions Workflow file with the following `jobs` block:
+
+``` yaml
+name: "Test workflow_call"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call_workflow:
+    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@main
+    with:
+      unos_debug: true
+      unos_test_mode: true
+```
+
+If you would like to specify the minimum os version, add `unos_min_major_os_version` to your Workflow
+If you would like to specify location (relative to the working directory of your repo) of the nudge.json file, add `unos_nudge_json_file` to your Workflow
+
 ## Python Script
 This has been written and tested on Python 3.11. The script can be run independtly of the GitHub Action and takes the following input:
 
