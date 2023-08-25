@@ -4,17 +4,37 @@ on:
   workflow_dispatch:
     inputs:
       unos_debug:
-        description: "Enables more verbose logging output"
+        description: "Enables debug logging"
         type: boolean
         required: false
         default: false
-      unos_test:
-        description: "Enables debug logging and prevents changes from being written to disk"
+      unos_test_mode:
+        description: "Enable test mode"
         type: boolean
         required: false
         default: true
       unos_min_major_os_version:
-        description: "Minimum major OS version supported at your organisation"
+        description: "Minimum Major OS version supported"
+        type: string
+        required: false
+      unos_nudge_json_file:
+        description: "Path to your Nudge JSON file"
+        type: string
+        required: false
+  workflow_call:
+    inputs:
+      unos_debug:
+        description: "Enables debug logging"
+        type: boolean
+        required: false
+        default: false
+      unos_test_mode:
+        description: "Enable test mode"
+        type: boolean
+        required: false
+        default: true
+      unos_min_major_os_version:
+        description: "Minimum Major OS version supported"
         type: string
         required: false
       unos_nudge_json_file:
@@ -58,7 +78,7 @@ jobs:
       - name: Run Nudge-Action
         env:
           UNOS_DEBUG: ${{ inputs.UNOS_DEBUG }}
-          UNOS_TEST: ${{ inputs.UNOS_TEST }}
+          UNOS_TEST_MODE_MODE: ${{ inputs.unos_test_mode }}
           UNOS_MIN_MAJOR_OS_VERSION: ${{ inputs.UNOS_MIN_MAJOR_OS_VERSION }}
           UNOS_NUDGE_JSON_FILE: ${{ inputs.UNOS_NUDGE_JSON_FILE }}
         run: |

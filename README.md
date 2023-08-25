@@ -6,7 +6,7 @@ This has been written and tested on Python 3.11. The script can be run independt
 
 - `--debug` OR `-d` OR `UNOS_DEBUG` (environment variable)
   - Produces verbose output to the console
-- `--test` OR `-t` OR `UNOS_TEST` (environment variable)
+- `--test-mode` OR `-t` OR `UNOS_TEST_MODE` (environment variable)
   - Will enable verbose logging and prevent writing anything to disk
 - `--version` OR `-v` OR `UNOS_MIN_MAJOR_OS_VERSION` (environment variable)
   - Sets the minimum major OS version supported in your environment
@@ -28,7 +28,7 @@ source .venv/bin/activate
 pip install -r app/requirements.txt
 
 # Run Script
-python app/app/update_nudge_osVersionRequirements.py --test
+python app/app/update_nudge_osVersionRequirements.py --test-mode
 ```
 
 ### Notes
