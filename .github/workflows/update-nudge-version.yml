@@ -2,9 +2,65 @@ name: "Update Nudge osVersionRequirements"
 
 on:
   workflow_dispatch:
+    inputs:
+      unos_debug:
+        description: "Enables more verbose logging output"
+        type: boolean
+        required: false
+        default: false
+      unos_test:
+        description: "Enables debug logging and prevents changes from being written to disk"
+        type: boolean
+        required: false
+        default: true
+      unos_min_major_os_version:
+        description: "Minimum major OS version supported at your organisation"
+        type: string
+        required: false
+      unos_nudge_json_file:
+        description: "Path to your Nudge JSON file"
+        type: string
+        required: false
+
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "Hello, World!"
+      - name: Checkout Nudge-Action Repo
+        uses: actions/checkout@v3
+        with:
+          repository: smithjw/nudge-action
+          path: nudge-action
+
+      - name: Extract Python version from .tool-versions file
+        id: extract_version
+        env:
+          tool_name: python
+        run: |
+          version=$(awk -v name="$tool_name" '$1 == name {print $2}' nudge-action/.tool-versions)
+          echo "PYTHON_VERSION=$version" >> $GITHUB_OUTPUT
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ steps.extract_version.outputs.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'nudge-action/app/requirements.txt'
+
+      - name: Install Python dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install -r nudge-action/app/requirements.txt
+
+      - name: Run Nudge-Action
+        env:
+          UNOS_DEBUG: ${{ inputs.UNOS_DEBUG }}
+          UNOS_TEST: ${{ inputs.UNOS_TEST }}
+          UNOS_MIN_MAJOR_OS_VERSION: ${{ inputs.UNOS_MIN_MAJOR_OS_VERSION }}
+          UNOS_NUDGE_JSON_FILE: ${{ inputs.UNOS_NUDGE_JSON_FILE }}
+        run: |
+          source .venv/bin/activate
+          python nudge-action/app/update_nudge_osVersionRequirements.py
