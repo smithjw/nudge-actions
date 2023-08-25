@@ -16,7 +16,7 @@ def read_json_file(file_name):
 
 def get_macos_product_versions():
     """Returns the macOS product versions from the GDMF API."""
-    if test:
+    if test_mode:
         local_gdmf = os.path.join(script_dir, "resources/gdfm.json")
 
         try:
@@ -179,7 +179,7 @@ def main():
         for version_requirement in nudge_json["osVersionRequirements"]
     ]
 
-    if test:
+    if test_mode:
         logging.debug(f"nudge.json: {json.dumps(nudge_json, indent=4)}")
         return
 
@@ -188,14 +188,16 @@ def main():
 
 if __name__ == "__main__":
     args = setup_args()
-    test = args.test if args.test else False
-    debug = test or args.debug if not test else True
+    test_mode = args.test_mode if args.test_mode else False
+    debug = test_mode or args.debug if not test_mode else True
 
     script_dir = os.path.dirname(__file__)
     execution_dir = os.getcwd()
 
     setup_logger(debug)
+    logging.info(args)
+    logging.info(f"test_mode: {test_mode}")
+    logging.info(f"debug: {debug}")
     logging.debug("Debug mode enabled")
-    logging.debug(args)
 
     main()

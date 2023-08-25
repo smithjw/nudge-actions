@@ -1,10 +1,33 @@
-name: "Call Update Nudge osVersionRequirements Workflow"
+name: "Test workflow_call"
 
 on:
   workflow_dispatch:
+    inputs:
+      unos_debug:
+        description: "Enable debug logging"
+        type: boolean
+        required: false
+        default: true
+      unos_test_mode:
+        description: "Enable test mode"
+        type: boolean
+        required: false
+        default: true
+      unos_min_major_os_version:
+        description: "Minimum Major OS version supported"
+        type: string
+        required: false
+      unos_nudge_json_file:
+        description: "Path to your Nudge JSON file"
+        type: string
+        required: false
 
 jobs:
-  build:
-    runs-on: ubuntu-22.04
-    steps:
-      - run: echo "Hello, World!"
+  call_update_nudge_version:
+    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@feat/github-action
+    secrets: inherit
+    with:
+      unos_debug: ${{ inputs.unos_debug }}
+      unos_test_mode: ${{ inputs.unos_test_mode }}
+      unos_min_major_os_version: ${{ inputs.unos_min_major_os_version }}
+      unos_nudge_json_file: ${{ inputs.unos_nudge_json_file }}

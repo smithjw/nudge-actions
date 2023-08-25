@@ -11,14 +11,15 @@ def setup_args():
         "--debug",
         action="store_true",
         default=check_env_var("UNOS_DEBUG", "bool", False),
-        help="Enable more verbose logging",
+        help="Enable debug logging",
     )
 
     parser.add_argument(
         "-t",
-        "--test",
+        "--test-mode",
+        dest="test_mode",
         action="store_true",
-        default=check_env_var("UNOS_TEST", "bool", False),
+        default=check_env_var("UNOS_TEST_MODE", "bool", False),
         help="Uses test data and doesn't write any data to disk",
     )
 
