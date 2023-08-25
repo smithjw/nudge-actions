@@ -1,0 +1,10 @@
+name: "Call Update Nudge osVersionRequirements Workflow"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "Hello, World!"
