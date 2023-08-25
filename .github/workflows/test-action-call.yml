@@ -1,4 +1,4 @@
-name: "Call Update Nudge osVersionRequirements Workflow"
+name: "Test workflow_call"
 
 on:
   workflow_dispatch:
