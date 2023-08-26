@@ -9,12 +9,19 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      patterns:
+        - "*"
+      update-types:
+        - "minor"
+        - "patch"
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
-groups:
-  prod-dependencies:
-    dependency-type: "production"
-  dev-dependencies:
-    dependency-type: "development"
+    groups:
+      patterns:
+        - "*"
+      update-types:
+        - "minor"
+        - "patch"
