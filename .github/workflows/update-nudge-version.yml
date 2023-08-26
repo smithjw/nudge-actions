@@ -42,13 +42,15 @@ on:
         type: string
         required: false
 
+permissions:
+  contents: read
 
 jobs:
   update_nudge_version:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Nudge-Action Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           repository: smithjw/nudge-actions
           path: nudge-actions
@@ -59,10 +61,10 @@ jobs:
           tool_name: python
         run: |
           version=$(awk -v name="$tool_name" '$1 == name {print $2}' nudge-actions/.tool-versions)
-          echo "PYTHON_VERSION=$version" >> $GITHUB_OUTPUT
+          echo "PYTHON_VERSION=${version:=latest}" >> $GITHUB_OUTPUT
 
       - name: Install Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1 # v4.7.0
         with:
           python-version: ${{ steps.extract_version.outputs.PYTHON_VERSION }}
           cache: 'pip'
@@ -73,7 +75,7 @@ jobs:
           python -m venv .venv
           source .venv/bin/activate
           python -m pip install --upgrade pip
-          pip install -r nudge-actions/app/requirements.txt
+          pip install -r nudge-actions/app/requirements.txt --require-hashes
 
       - name: Run Nudge-Action
         env:
