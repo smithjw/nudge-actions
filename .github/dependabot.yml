@@ -10,18 +10,20 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      patterns:
-        - "*"
-      update-types:
-        - "minor"
-        - "patch"
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
     groups:
-      patterns:
-        - "*"
-      update-types:
-        - "minor"
-        - "patch"
+      pip:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
