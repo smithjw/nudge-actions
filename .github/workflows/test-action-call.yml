@@ -3,6 +3,11 @@ name: "Test workflow_call"
 on:
   workflow_dispatch:
     inputs:
+      remove_git_hooks:
+        description: "Remove Git Hooks"
+        type: boolean
+        required: false
+        default: true
       unos_debug:
         description: "Enable debug logging"
         type: boolean
@@ -24,9 +29,10 @@ on:
 
 jobs:
   call_update_nudge_version:
+    # uses: ./.github/workflows/update-nudge-version.yml
     uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@04fb86174595965d12dd20d7e23722a795342b6b # v0.1.0
-    secrets: inherit
     with:
+      remove_git_hooks: ${{ inputs.remove_git_hooks }}
       unos_debug: ${{ inputs.unos_debug }}
       unos_test_mode: ${{ inputs.unos_test_mode }}
       unos_min_major_os_version: ${{ inputs.unos_min_major_os_version }}
