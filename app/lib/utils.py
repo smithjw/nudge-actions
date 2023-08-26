@@ -11,7 +11,7 @@ def string_to_bool(value) -> bool:
     Raises ValueError if 'val' is anything else.
     """
 
-    if type(value) is bool:
+    if isinstance(value, bool):
         # Return the value if it's already a boolean
         return value
 
