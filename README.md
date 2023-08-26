@@ -12,6 +12,10 @@ name: "Test workflow_call"
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   call_workflow:
     uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@main
@@ -19,6 +23,7 @@ jobs:
       unos_test_mode: true
 ```
 
+- The permissions block is required so that the Reusable Workflow is able to write changes to the json file in your repo and open a new PR before those changes are merged into your main branch.
 - If you would like to specify the minimum os version, add `unos_min_major_os_version` to your Workflow
 - If you would like to specify location (relative to the working directory of your repo) of the nudge.json file, add `unos_nudge_json_file` to your Workflow
 - To write an updated file, and create a new in your repo, set `unos_test_mode` to `false`
