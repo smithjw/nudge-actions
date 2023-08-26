@@ -3,6 +3,11 @@ name: "Update Nudge osVersionRequirements"
 on:
   workflow_dispatch:
     inputs:
+      remove_git_hooks:
+        description: "Remove Git Hooks"
+        type: boolean
+        required: false
+        default: true
       unos_debug:
         description: "Enable debug logging"
         type: boolean
@@ -21,8 +26,14 @@ on:
         description: "Path to your Nudge JSON file"
         type: string
         required: false
+        default: "nudge.json"
   workflow_call:
     inputs:
+      remove_git_hooks:
+        description: "Remove Git Hooks"
+        type: boolean
+        required: false
+        default: true
       unos_debug:
         description: "Enable debug logging"
         type: boolean
@@ -41,15 +52,20 @@ on:
         description: "Path to your Nudge JSON file"
         type: string
         required: false
+        default: "nudge.json"
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   update_nudge_version:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Nudge-Action Repo
+      - name: Checkout Caller Repo
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+
+      - name: Checkout Nudge-Actions Repo
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           repository: smithjw/nudge-actions
@@ -74,15 +90,30 @@ jobs:
         run: |
           python -m venv .venv
           source .venv/bin/activate
-          python -m pip install --upgrade pip
           pip install -r nudge-actions/app/requirements.txt --require-hashes
 
       - name: Run Nudge-Action
         env:
-          UNOS_DEBUG: ${{ inputs.UNOS_DEBUG }}
+          UNOS_DEBUG: ${{ inputs.unos_debug }}
           UNOS_TEST_MODE: ${{ inputs.unos_test_mode }}
-          UNOS_MIN_MAJOR_OS_VERSION: ${{ inputs.UNOS_MIN_MAJOR_OS_VERSION }}
-          UNOS_NUDGE_JSON_FILE: ${{ inputs.UNOS_NUDGE_JSON_FILE }}
+          UNOS_MIN_MAJOR_OS_VERSION: ${{ inputs.unos_min_major_os_version }}
+          UNOS_NUDGE_JSON_FILE: ${{ inputs.unos_nudge_json_file }}
         run: |
           source .venv/bin/activate
           python nudge-actions/app/update_nudge_osVersionRequirements.py
+
+      - name: Remove git hooks
+        if: inputs.remove_git_hooks
+        run: |
+          rm -rf .git/hooks
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # v5.0.2
+        with:
+          branch: update-nudge-osVersionRequirements
+          commit-message: "Update ${{ inputs.unos_nudge_json_file }} with latest macOS versions"
+          title: "Update to Nudge osVersionRequirements"
+          body: "A new version of macOS has been released, please review the changes and merge this PR to update the Nudge osVersionRequirements key"
+          add-paths: |
+            ${{ inputs.unos_nudge_json_file }}
+          # token: ${{ secrets.GITHUB_TOKEN }}
