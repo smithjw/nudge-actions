@@ -30,7 +30,7 @@ on:
 jobs:
   call_update_nudge_version:
     # uses: ./.github/workflows/update-nudge-version.yml
-    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@04fb86174595965d12dd20d7e23722a795342b6b # v0.1.0
+    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@2944dcae127ac1bc8c1fccf8750d9fb8fbe592b9 # v0.2.0
     with:
       remove_git_hooks: ${{ inputs.remove_git_hooks }}
       unos_debug: ${{ inputs.unos_debug }}
