@@ -1,0 +1,39 @@
+name: Upload json File to Azure
+# This example is taken from the Azure Documentation and a direct link is below
+# https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-static-site-github-actions?tabs=userlevel#add-your-workflow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nudge.json'
+      # Modify the name of this to match what your json file is called
+
+jobs:
+  upload-file:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch --account-name <STORAGE_ACCOUNT_NAME> --auth-mode key -d '$web' -s 'nudge.json'
+            # Modify the name of the json file to match what your json file is called
+
+      # If you're using a CDN, you can purge the cache with the following step
+      - name: Purge CDN endpoint
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az cdn endpoint purge --content-paths  "/*" --profile-name "CDN_PROFILE_NAME" --name "CDN_ENDPOINT" --resource-group "RESOURCE_GROUP"
+
+      - name: logout
+        run: |
+          az logout
+        if: always()

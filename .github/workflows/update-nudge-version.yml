@@ -120,4 +120,3 @@ jobs:
           body: "A new version of macOS has been released, please review the changes and merge this PR to update the Nudge osVersionRequirements key"
           add-paths: |
             ${{ inputs.unos_nudge_json_file }}
-          # token: ${{ secrets.GITHUB_TOKEN }}
