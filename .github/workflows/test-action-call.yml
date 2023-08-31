@@ -34,7 +34,7 @@ permissions:
 jobs:
   call_update_nudge_version:
     # uses: ./.github/workflows/update-nudge-version.yml
-    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@3103af07fb995ee514af511c9cbe09e7d4de80ec # v0.2.1
+    uses: smithjw/nudge-actions/.github/workflows/update-nudge-version.yml@d3a13bae9fbbd9a6ab08532f31502677539eb7e6 # v0.3.0
     with:
       remove_git_hooks: ${{ inputs.remove_git_hooks }}
       unos_debug: ${{ inputs.unos_debug }}
