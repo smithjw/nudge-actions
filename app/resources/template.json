@@ -3,6 +3,12 @@
         {
             "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
             "requiredInstallationDate": "",
+            "requiredMinimumOSVersion": "14.0",
+            "targetedOSVersionsRule": "14"
+        },
+        {
+            "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
+            "requiredInstallationDate": "",
             "requiredMinimumOSVersion": "13.0",
             "targetedOSVersionsRule": "13"
         },
