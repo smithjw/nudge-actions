@@ -8,20 +8,20 @@
         },
         {
             "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
-            "requiredInstallationDate": "2023-09-09T12:00:00Z",
-            "requiredMinimumOSVersion": "13.5.1",
+            "requiredInstallationDate": "2023-10-11T12:00:00Z",
+            "requiredMinimumOSVersion": "14.0",
             "targetedOSVersionsRule": "13"
         },
         {
             "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
-            "requiredInstallationDate": "2023-09-09T12:00:00Z",
-            "requiredMinimumOSVersion": "12.6.8",
+            "requiredInstallationDate": "2023-10-11T12:00:00Z",
+            "requiredMinimumOSVersion": "14.0",
             "targetedOSVersionsRule": "12"
         },
         {
             "aboutUpdateURL": "https://support.apple.com/en-au/HT201222",
-            "requiredInstallationDate": "2023-09-09T12:00:00Z",
-            "requiredMinimumOSVersion": "13.5.1",
+            "requiredInstallationDate": "2023-10-11T12:00:00Z",
+            "requiredMinimumOSVersion": "14.0",
             "targetedOSVersionsRule": "11"
         }
     ]
