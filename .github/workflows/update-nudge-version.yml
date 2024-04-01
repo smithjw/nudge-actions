@@ -80,7 +80,7 @@ jobs:
           echo "PYTHON_VERSION=${version:=latest}" >> $GITHUB_OUTPUT
 
       - name: Install Python
-        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
         with:
           python-version: ${{ steps.extract_version.outputs.PYTHON_VERSION }}
           cache: 'pip'
@@ -112,7 +112,7 @@ jobs:
           rm -rf nudge-actions
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@b1ddad2c994a25fbc81a28b3ec0e368bb2021c50 # v6.0.0
+        uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e # v6.0.2
         with:
           branch: update-nudge-osVersionRequirements
           commit-message: "Update ${{ inputs.unos_nudge_json_file }} with latest macOS versions"
