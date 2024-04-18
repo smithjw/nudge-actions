@@ -39,4 +39,4 @@ To ensure that the hashes supplied in `requirements.txt` work across multiple pl
 
 To run, execute the following command:
 
-`pip-compile-cross-platform --min-python-version 3.11 app/requirements.in`
+`pip-compile-cross-platform --min-python-version 3.12 app/requirements.in`
